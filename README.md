@@ -3,6 +3,8 @@
 
 Prompt Reader是一个VSCode扩展，帮助你管理和使用本地提示词模板。它提供了简单易用的界面，让你可以快速访问、复制和管理常用的提示词。
 
+# 本地编译
+1. npm run vscode:prepublish 
 
 ## 使用流程
 
