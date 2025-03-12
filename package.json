@@ -1,0 +1,109 @@
+{
+  "name": "prompt-reader",
+  "displayName": "Prompt Reader",
+  "description": "Read and manage local prompt templates",
+  "version": "0.0.6",
+  "publisher": "local-publisher",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/vscode-extension-samples"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:promptReaderView",
+    "onCommand:prompt-reader.readPrompts",
+    "onCommand:prompt-reader.setPromptsPath",
+    "onCommand:prompt-reader.refreshView",
+    "onCommand:prompt-reader.addPrompt",
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "prompt-reader",
+          "title": "Prompt Reader",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "prompt-reader": [
+        {
+          "id": "promptReaderView",
+          "name": "Prompts",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "prompt-reader.readPrompts",
+        "title": "Read Prompts"
+      },
+      {
+        "command": "prompt-reader.setPromptsPath",
+        "title": "Set Prompts File Path"
+      },
+      {
+        "command": "prompt-reader.refreshView",
+        "title": "Refresh Prompts View",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "prompt-reader.addPrompt",
+        "title": "Add New Prompt"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "prompt-reader.setPromptsPath",
+          "when": "view == promptReaderView",
+          "group": "navigation"
+        },
+        {
+          "command": "prompt-reader.refreshView",
+          "when": "view == promptReaderView",
+          "group": "navigation"
+        },
+        {
+          "command": "prompt-reader.addPrompt",
+          "when": "view == promptReaderView",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Prompt Reader",
+      "properties": {
+        "promptReader.promptsPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the prompts markdown file"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "npx @vscode/vsce package --no-dependencies",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x.x",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.x.x"
+  }
+}
